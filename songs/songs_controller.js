@@ -1,16 +1,32 @@
-const fetchSongs = (req, res) => {
-  return res.send("Fetching songs");
+const { SongsModel } = require("./songs_model");
+
+const fetchSongs = async (req, res) => {
+  const songs = await SongsModel.find({});
+
+  return res.json(songs);
 };
 
-const createSong = (req, res) => {
-  return res.send("Creating songs");
+const createSong = async (req, res) => {
+  const title = req.body.title;
+  const artist = req.body.artist;
+  const album = req.body.album;
+  const genre = req.body.genre;
+
+  const song = await SongsModel.create({
+    title,
+    artist,
+    album,
+    genre,
+  });
+
+  return res.json(song);
 };
 
-const updateSong = (req, res) => {
+const updateSong = async (req, res) => {
   return res.send("Update a song");
 };
 
-const deleteSong = (req, res) => {
+const deleteSong = async (req, res) => {
   return res.send("Deleting  a song");
 };
 
