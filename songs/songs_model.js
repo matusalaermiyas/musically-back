@@ -1,15 +1,15 @@
 const { Schema, default: mongoose } = require("mongoose");
 
-const songSchema = new Schema({
-  title: String,
-  artist: String,
-  album: String,
-  genre: String,
+const songsSchema = new Schema({
+  title: { type: String, required: true },
+  artist: { type: Schema.Types.ObjectId, ref: "artist" },
+  album: { type: Schema.Types.ObjectId, ref: "album" },
+  genre: { type: Schema.Types.ObjectId, ref: "genre" },
 });
 
-const SongModel = mongoose.model("Song", songSchema);
+const SongsModel = mongoose.model("song", songsSchema);
 
 module.exports = {
-  SongModel,
-  songSchema,
+  SongsModel,
+  songsSchema,
 };
