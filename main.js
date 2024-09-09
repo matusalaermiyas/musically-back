@@ -1,4 +1,6 @@
 const express = require("express");
+require("express-async-errors");
+
 const { appLoger } = require("./services/logger");
 
 const { connectToDatabase } = require("./services/database");
@@ -19,6 +21,7 @@ async function main() {
   app.use(express.json());
   app.use(require("morgan")("tiny"));
   app.use(require("cors")());
+  app.use(require("helmet")());
 
   app.use("/songs", songsRouter);
   app.use("/albums", albumsRouter);
@@ -27,6 +30,12 @@ async function main() {
   app.use("/statistics", statisticsRoute);
 
   app.listen(PORT, () => appLoger.info(`Server listening on port ${PORT}`));
+
+  // Error handling middleware
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    return res.status(500).json({ message: "Error occurred" });
+  });
 }
 
 main();
