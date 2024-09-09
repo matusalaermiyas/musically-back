@@ -1,7 +1,14 @@
 const { Schema, default: mongoose } = require("mongoose");
 
 const albumSchema = new Schema({
-  title: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
   artist: {
     type: Schema.Types.ObjectId,
     ref: "artist",
