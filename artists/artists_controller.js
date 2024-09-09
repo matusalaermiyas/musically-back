@@ -2,9 +2,11 @@ const { ArtistsModel } = require("./artists_model");
 
 const createArtist = async (req, res) => {
   const artistName = req.body.artistName;
+  const imageUrl = req.body.imageUrl;
 
   const artist = await ArtistsModel.create({
     name: artistName,
+    imageUrl,
   });
 
   return res.json(artist);

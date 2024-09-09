@@ -1,7 +1,15 @@
 const { Schema, default: mongoose } = require("mongoose");
 
 const artistsSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true,
+  },
+
+  imageUrl: {
+    type: String,
+    required: true,
+  },
 });
 
 const ArtistsModel = mongoose.model("artist", artistsSchema);
