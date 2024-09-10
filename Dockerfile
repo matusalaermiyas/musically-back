@@ -1,21 +1,21 @@
-# Use an official Node.js runtime as the base image
 FROM node:alpine
 
-# Set working directory
+# Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json (or yarn.lock) and install dependencies
+
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copy the rest of the application code to the working directory
 COPY . .
 
-# Build the application (optional, if you have a build step like TypeScript)
-# RUN npm run build
-
 # Expose the port the app runs on
-EXPOSE 8080
+EXPOSE 3000
 
-# Run the application
-CMD ["npm", "start"]
+# Start the Node.js application
+CMD [ "node", "main.js" ]
+
